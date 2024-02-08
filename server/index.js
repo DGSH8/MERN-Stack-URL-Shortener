@@ -8,11 +8,23 @@ require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors({
-    origin: '*', // Allow requests from all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
-}));
+app.use((req, res, next) => {
+    // Allow requests from all origins
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Allow specific methods
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    // Allow specific headers
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        // Respond to preflight requests
+        res.sendStatus(200);
+    } else {
+        // Move to the next middleware
+        next();
+    }
+});
 app.use(express.json());
 app.listen(PORT, async () => {
     try {
