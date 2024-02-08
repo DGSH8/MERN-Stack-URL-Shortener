@@ -16,7 +16,11 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/register", { name, email, password })
+      .post("https://mern-stack-url-shortener-backend.vercel.app/register", {
+        name,
+        email,
+        password,
+      })
       .then((result) => {
         console.log(result);
         navigate("/login");

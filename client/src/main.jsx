@@ -12,7 +12,7 @@ import {
 import { BrowserRouter, Routes } from "react-router-dom";
 import axios from "axios";
 
-const serverLocal = "http://localhost:5000";
+const serverLocal = "https://mern-stack-url-shortener-backend.vercel.app";
 const serverBaseUrl = import.meta.env.VITE_APP_URI;
 axios.defaults.baseURL = serverBaseUrl;
 
